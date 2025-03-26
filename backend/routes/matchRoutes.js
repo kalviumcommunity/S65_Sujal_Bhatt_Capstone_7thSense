@@ -59,4 +59,27 @@ router.post("/game/match-result", (req, res) => {
     res.json({ message: "Match result recorded", winner: "Player1" });
   });
 
+
+// PUT
+
+router.put("/game/change-mode", (req, res) => {
+  res.json({ message: "Game mode updated", newMode: "Battle Royale"});
+});
+
+router.put("/match/cancel", (req, res) => {
+  res.json({ message: "Matchmaking canceled" });
+});
+
+router.put("/game/update-score", (req, res) => {
+  res.json({ message: "Score updated", newScore: "20"});
+});
+
+router.put("/game/update-result", (req, res) => {
+  res.json({ message: "Match result updated" });
+});
+
+router.put("/match/reconnect", (req, res) => {
+  res.json({ message: "Reconnected to match" });
+});
+
 module.exports = router
