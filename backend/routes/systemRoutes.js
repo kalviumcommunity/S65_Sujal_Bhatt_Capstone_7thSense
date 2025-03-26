@@ -16,4 +16,17 @@ router.post("/support/ticket", (req, res) => {
     res.json({ message: "Support ticket created successfully" });
   });
 
+
+//PUT
+
+router.put("/report/update-status", (req, res) => {
+  res.json({ message: "Report status updated" });
+});
+
+router.put("/support/update-ticket", (req, res) => {
+  res.json({ message: "Support ticket updated" });
+});
+
 module.exports = router
+
+

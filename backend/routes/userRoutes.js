@@ -65,5 +65,24 @@ router.post("/profile/update", (req, res) => {
 router.post("/profile/progress", (req, res) => {
     res.json({ message: "User progress updated", rank: "Silver" });
   });
-  
+
+
+// PUT
+
+router.put("/update-password", (req, res) => {
+  res.json({ message: "Password updated successfully" });
+});
+
+router.put("/profile/update-avatar", (req, res) => {
+  res.json({ message: "Avatar updated successfully" });
+});
+
+router.put("/profile/update-username", (req, res) => {
+  res.json({ message: "Username updated successfully" });
+});
+
+router.put("/profile/update-rank", (req, res) => {
+  res.json({ message: "User rank updated" });
+});
+
 module.exports = router

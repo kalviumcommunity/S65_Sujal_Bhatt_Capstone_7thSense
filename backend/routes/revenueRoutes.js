@@ -32,4 +32,19 @@ router.post("/wallet/reward-claim", (req, res) => {
     res.json({ message: "Reward claimed successfully", reward: "$50" });
   });
 
-module.exports = router 
+
+// PUT
+
+router.put("/wallet/update-payment-method", (req, res) => {
+  res.json({ message: "Payment method updated successfully" });
+});
+
+router.put("/wallet/cancel-withdrawal", (req, res) => {
+  res.json({ message: "Withdrawal request canceled" });
+});
+
+router.put("/wallet/adjust-balance", (req, res) => {
+  res.json({ message: "Wallet balance adjusted" });
+});
+
+module.exports = router
