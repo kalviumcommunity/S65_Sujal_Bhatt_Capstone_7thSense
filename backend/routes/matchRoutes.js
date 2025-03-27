@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get("/matches/:id", async (req, res) => {
   try {
-    const match = await Match.findById(req.params.id);
+    const match = await Match.findById(req.params.id).populate("players"); 
     if (!match) return res.status(404).json({ message: "Match not found" });
     res.json(match);
   } catch (error) {

@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.get("/rewards/:userId", async (req, res) => {
   try {
-    const revenue = await Revenue.findOne({ userId: req.params.userId });
+    const revenue = await Revenue.findOne({ userId: req.params.userId }).populate("userId"); 
     if (!revenue) return res.status(404).json({ message: "No rewards found" });
     res.json({ earned: revenue.earned, withdrawn: revenue.withdrawn });
   } catch (error) {

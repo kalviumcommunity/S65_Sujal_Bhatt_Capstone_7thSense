@@ -1,8 +1,7 @@
 const mongoose = require("mongoose");
-const User = require("./userModel"); // Fixed import path
+const User = require("./userModel");
 
 const matchSchema = new mongoose.Schema({
-  matchId: { type: Number, required: true, unique: true },
   players: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
   result: { type: String, enum: ["Win", "Loss", "Draw"], required: true },
   scores: { type: Map, of: Number }, 
