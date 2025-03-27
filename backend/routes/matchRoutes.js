@@ -1,19 +1,26 @@
-const express = require("express")
-const router = express.Router()
+const express = require("express");
+const Match = require("../models/matchModel");
+const User = require("../models/userModel");
+const router = express.Router();
 
-const matches = [
-    { id: 1, players: ["Alice", "Bob"], status: "Waiting", score: { Alice: 50, Bob: 40 } },
-    { id: 2, players: ["John", "Mike"], status: "Ongoing", score: { John: 30, Mike: 25 } }
-  ];
-  
-router.get("/matches/:id", (req, res) => {
-    const match = matches.find(m => m.id == req.params.id);
-    res.json(match || { message: "Match not found" });
-  });
-  
-router.get("/matchmaking/:userId", (req, res) => {
+router.get("/matches/:id", async (req, res) => {
+  try {
+    const match = await Match.findById(req.params.id);
+    if (!match) return res.status(404).json({ message: "Match not found" });
+    res.json(match);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+router.get("/matchmaking/:userId", async (req, res) => {
+  try {
+    const matches = await Match.find({ status: "Waiting" });
     res.json({ message: "Available match lobbies", matches });
-  });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
   
 router.get("/matches/:id/history", (req, res) => {
     res.json([{ matchId: req.params.id, history: "Detailed match history goes here" }]);
@@ -30,10 +37,15 @@ router.post("/game/join", (req, res) => {
     res.json({ message: "User joined the game", gameMode: "1V1" });
   });
   
-router.post("/game/matchmaking", (req, res) => {
-    res.json({ message: "Finding an opponent..." });
-  });
-  
+router.post("/game/matchmaking", async (req, res) => {
+  try {
+    const match = new Match({ players: [req.body.userId], status: "Waiting" });
+    await match.save();
+    res.json({ message: "Matchmaking started", matchId: match._id });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+}); 
   
 router.post("/match/ready", (req, res) => {
     res.json({ message: "Player is ready for the match" });
@@ -55,9 +67,18 @@ router.post("/game/score-update", (req, res) => {
     res.json({ message: "Score updated", score: 10 });
   });
   
-router.post("/game/match-result", (req, res) => {
-    res.json({ message: "Match result recorded", winner: "Player1" });
-  });
+router.post("/game/match-result", async (req, res) => {
+  try {
+    const match = await Match.findById(req.body.matchId);
+    if (!match) return res.status(404).json({ message: "Match not found" });
+    match.result = req.body.result;
+    match.status = "Completed";
+    await match.save();
+    res.json({ message: "Match result recorded", match });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
 
 
 // PUT
@@ -82,4 +103,4 @@ router.put("/match/reconnect", (req, res) => {
   res.json({ message: "Reconnected to match" });
 });
 
-module.exports = router
+module.exports = router;

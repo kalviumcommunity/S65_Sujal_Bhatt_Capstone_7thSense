@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const User = require("./models/user")
+const User = require("./userModel");
 
 const systemSchema = new mongoose.Schema({
   rules: [{ type: String }],
@@ -8,6 +8,7 @@ const systemSchema = new mongoose.Schema({
       userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
       description: { type: String, required: true },
       status: { type: String, enum: ["Pending", "Resolved"], default: "Pending" },
+      createdAt: { type: Date, default: Date.now },
     },
   ],
   supportTickets: [
@@ -15,6 +16,7 @@ const systemSchema = new mongoose.Schema({
       userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
       issue: { type: String, required: true },
       status: { type: String, enum: ["Open", "Closed"], default: "Open" },
+      createdAt: { type: Date, default: Date.now },
     },
   ],
 });
