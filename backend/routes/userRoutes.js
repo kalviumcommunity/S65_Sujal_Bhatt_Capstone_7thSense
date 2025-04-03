@@ -43,7 +43,22 @@ router.get("/users/:id/settings", (req, res) => {
 // POST
 router.post("/signup", async (req, res) => {
   try {
-    const hashedPassword = await bcrypt.hash(req.body.password, 10); // Hash the password
+    const {email, password} = req.body
+
+    if (!email){
+      return res.status(400).send("Email field is required")
+    } 
+    if (!password){
+      return res.status(400).send("Password is required")
+    }
+    if (password.length < 8 || password.length > 16){
+      return res.status(400).send("Password must be between 8 and 16 characters")
+    }
+    const existingUser = await User.findOne({email})
+    if (existingUser){
+      return res.status(400).send("User already exists!")
+    }
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
     const user = new User({ ...req.body, password: hashedPassword });
     await user.save();
     res.status(201).json({ message: "User registered successfully", user });
@@ -55,7 +70,12 @@ router.post("/signup", async (req, res) => {
 router.post("/login", async (req, res) => {
   try {
     const user = await User.findOne({ email: req.body.email });
-    if (!user || !(await bcrypt.compare(req.body.password, user.password))) {
+    if (!user){
+      return res.status(400).send("User doesn't exist!")
+    } 
+
+    const isMatch = await bcrypt.compare(req.body.password, user.password)
+    if (!isMatch) {
       return res.status(401).json({ message: "Invalid credentials" });
     }
     res.json({ message: "User logged in successfully", userId: user._id });
