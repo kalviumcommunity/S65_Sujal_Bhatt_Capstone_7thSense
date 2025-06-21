@@ -1,5 +1,9 @@
 # **7th Sense - Capstone Project**
 
+### Deployed Link Fronend 
+
+https://7th-sense.netlify.app
+
 ## **Project Title:**  
 **7th Sense**
 
@@ -63,9 +67,10 @@ This creates an engaging and rewarding experience for learners.
 - **Day 30:** Submit final project, receive feedback, and make necessary improvements.  
 
 
-### Deployed Link Fronend 
 
-https://delightful-starburst-338439.netlify.app/
+
+
+
 
 
 
