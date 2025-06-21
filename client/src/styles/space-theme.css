@@ -1,0 +1,217 @@
+:root {
+  /* Space Theme Colors */
+  --space-primary: #0B0B2B;
+  --space-secondary: #1A1A4F;
+  --space-accent: #9370DB;
+  --space-accent-hover: #800080;
+  --space-text: #FFFFFF;
+  --space-text-secondary: #B3B3FF;
+  --space-background: #000000;
+  --space-card-bg: rgba(26, 26, 79, 0.7);
+  --space-card-border: rgba(147, 112, 219, 0.3);
+  --space-card-hover: rgba(147, 112, 219, 0.1);
+  --space-success: #00FF9D;
+  --space-error: #FF4D4D;
+  --space-warning: #FFB84D;
+  
+  /* Space Gradients */
+  --space-gradient-primary: linear-gradient(135deg, var(--space-primary) 0%, var(--space-secondary) 100%);
+  --space-gradient-accent: linear-gradient(135deg, var(--space-accent) 0%, var(--space-accent-hover) 100%);
+  --space-gradient-card: linear-gradient(135deg, rgba(26, 26, 79, 0.9) 0%, rgba(11, 11, 43, 0.9) 100%);
+  
+  /* Space Shadows */
+  --space-shadow-sm: 0 2px 8px rgba(147, 112, 219, 0.1);
+  --space-shadow-md: 0 4px 12px rgba(147, 112, 219, 0.15);
+  --space-shadow-lg: 0 8px 24px rgba(147, 112, 219, 0.2);
+  
+  /* Space Animations */
+  --space-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Space Theme Utility Classes */
+.space-bg {
+  background-color: var(--space-background);
+  background-image:
+    radial-gradient(circle at 50% 50%, rgba(147, 112, 219, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(128, 0, 128, 0.1) 0%, transparent 50%);
+  background-attachment: fixed;
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.space-bg::before, .space-bg::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.space-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background-image: radial-gradient(circle, #FFF 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: stars-twinkle 15s infinite alternate;
+  opacity: 0.8;
+}
+
+.space-bg::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background: transparent;
+  animation: comet-move 20s infinite linear;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  box-shadow: 0 0 50px 10px rgba(147, 112, 219, 0.8),
+              0 0 20px 5px rgba(128, 0, 128, 0.6),
+              -50px 50px 0 0 rgba(255, 255, 255, 0.3),
+              -100px 100px 0 0 rgba(255, 255, 255, 0.2),
+              -150px 150px 0 0 rgba(255, 255, 255, 0.1);
+}
+
+.space-card {
+  background: var(--space-card-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--space-card-border);
+  box-shadow: var(--space-shadow-md);
+  transition: var(--space-transition);
+  border-radius: 0.5rem;
+}
+
+.space-card:hover {
+  background: var(--space-card-hover);
+  transform: translateY(-5px);
+  box-shadow: var(--space-shadow-lg);
+}
+
+.space-button {
+  background: var(--space-card-bg);
+  color: var(--space-text);
+  border: 1px solid var(--space-card-border);
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: var(--space-transition);
+  box-shadow: var(--space-shadow-sm);
+}
+
+.space-button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--space-shadow-md);
+  background: var(--space-card-hover);
+  border-color: var(--space-accent);
+}
+
+.space-text {
+  color: var(--space-text);
+}
+
+.space-text-secondary {
+  color: var(--space-text-secondary);
+}
+
+/* Space Theme Animations */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+@keyframes glow {
+  0% { box-shadow: 0 0 5px rgba(147, 112, 219, 0.5); }
+  50% { box-shadow: 0 0 20px rgba(147, 112, 219, 0.8); }
+  100% { box-shadow: 0 0 5px rgba(147, 112, 219, 0.5); }
+}
+
+@keyframes stars-twinkle {
+  0% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.2); }
+  100% { opacity: 0.5; transform: scale(1); }
+}
+
+.float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.pulse {
+  animation: pulse 3s ease-in-out infinite;
+}
+
+.glow {
+  animation: glow 3s ease-in-out infinite;
+}
+
+/* Space Theme Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--space-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--space-accent);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--space-accent-hover);
+}
+
+/* How It Works Section - Concentric Circles */
+.circle-1,
+.circle-2,
+.circle-3 {
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid rgba(147, 112, 219, 0.5); /* space-accent with opacity */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.circle-1 {
+  width: 250px;
+  height: 250px;
+  animation: pulse-circle 3s infinite ease-in-out;
+}
+
+.circle-2 {
+  width: 300px;
+  height: 300px;
+  animation: pulse-circle 3s infinite ease-in-out 0.5s;
+}
+
+.circle-3 {
+  width: 350px;
+  height: 350px;
+  animation: pulse-circle 3s infinite ease-in-out 1s;
+}
+
+@keyframes pulse-circle {
+  0% { transform: scale(0.95); opacity: 0.7; }
+  50% { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(0.95); opacity: 0.7; }
+} 

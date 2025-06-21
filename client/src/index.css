@@ -14,6 +14,7 @@ body {
   font-family: "Inter", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'><circle cx='15' cy='15' r='10' fill='purple' opacity='0.8'/><circle cx='15' cy='15' r='5' fill='white' opacity='0.6'/></svg>") 15 15, auto;
 }
 
 .font-londrina {

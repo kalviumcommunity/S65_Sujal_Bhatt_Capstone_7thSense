@@ -2,24 +2,53 @@
   "name": "s65_sujal_bhatt_capstone_7thsense",
   "version": "1.0.0",
   "description": "**7th Sense**",
+  "engines": {
+    "node": "18.19.1",
+    "npm": "10.2.4"
+  },
+  "resolutions": {
+    "debug": "4.3.4",
+    "connect-mongo": "4.6.0"
+  },
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "bcrypt": "^5.1.1",
+    "axios": "^1.9.0",
+    "bcryptjs": "^3.0.2",
+    "connect-mongo": "4.6.0",
     "cors": "^2.8.5",
+    "debug": "4.3.4",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "express-session": "^1.18.1",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.3.0",
     "mongoose": "^8.13.0",
     "multer": "^1.4.5-lts.2",
     "nodemon": "^3.1.9",
+    "ollama": "^0.5.16",
+    "openai": "^4.97.0",
     "passport": "^0.7.0",
-    "passport-google-oauth20": "^2.0.0"
+    "passport-google-oauth20": "^2.0.0",
+    "paytmchecksum": "^1.5.1",
+    "razorpay": "^2.9.6",
+    "socket.io": "^4.8.1",
+    "string-similarity": "^4.0.4",
+    "uuid": "^11.1.0",
+    "ws": "^8.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  },
+  "overrides": {
+    "debug": "4.3.4"
   }
 }
